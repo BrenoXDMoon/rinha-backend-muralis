@@ -5,6 +5,8 @@ services:
   java_app:
     image: openjdk:11-jre-slim
     command: java -jar sua_aplicacao.jar
+    depends_on:
+      - mysql_db
     deploy:
       replicas: 3
       resources:
@@ -34,8 +36,8 @@ services:
     image: nginx:latest
     ports:
       - "8080:80"
-    depends_on:
-      - java_app
+    expose:
+      - "80"
     deploy:
       replicas: 1
       resources:
