@@ -35,7 +35,9 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "8080:80"
+      - "9999:999"
+    depends_on:
+      - mysql_db
     expose:
       - "80"
     deploy:
