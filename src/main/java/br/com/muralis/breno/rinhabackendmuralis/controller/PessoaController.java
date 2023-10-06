@@ -2,6 +2,8 @@ package br.com.muralis.breno.rinhabackendmuralis.controller;
 
 import br.com.muralis.breno.rinhabackendmuralis.dto.PessoaDTO;
 import br.com.muralis.breno.rinhabackendmuralis.service.PessoaService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,8 +15,9 @@ public class PessoaController {
     private PessoaService service;
 
     @PostMapping
-    public void salvarPessoa(PessoaDTO pessoaDTO){
+    public ResponseEntity salvarPessoa(PessoaDTO pessoaDTO){
         service.salvarPessoa(pessoaDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).header("Location", "/pessoas/" + pessoaDTO.getId()).body(pessoaDTO);
     }
 
     @GetMapping("{palavra}")
